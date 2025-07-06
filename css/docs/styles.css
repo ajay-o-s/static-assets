@@ -39,19 +39,29 @@ header {
 }
 
 .toggle-btn {
-  background: none;
+  background-color: transparent;
   border: 1px solid var(--primary);
   color: var(--primary);
   padding: 6px 12px;
-  border-radius: 8px;
+  border-radius: 24px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease;
 }
 
 .toggle-btn:hover {
-  background: var(--primary);
+  background-color: var(--primary);
   color: white;
+}
+
+#theme-icon {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.3s;
 }
 
 .container {
