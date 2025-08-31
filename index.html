@@ -415,10 +415,6 @@
     </div>
 
     <script>
-      const repoOwner = "ajay-o-s";
-      const repoName = "static-assets";
-      const branch = "master"; // adjust if needed
-
       let allFiles = [];
       let currentPath = "";
       let currentView = "grid";
@@ -620,7 +616,7 @@
 
       async function loadFiles() {
         try {
-          const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/git/trees/${branch}?recursive=1`;
+          const apiUrl = `https://api.github.com/repos/ajay-o-s/static-assets/git/trees/master?recursive=1`;
           const res = await fetch(apiUrl);
           const data = await res.json();
           if (!data.tree) throw new Error("Failed to fetch repo");
