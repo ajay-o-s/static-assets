@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>static | static.ajayos.in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content="Static Assets | AOS - Ajay O S" />
+    <meta
+      name="description"
+      content="Public static assets repository for AOS (Ajay O S). Browse, preview, and access hosted files and resources."
+    />
+    <meta name="author" content="Ajay O S" />
+    <meta
+      name="keywords"
+      content="static, assets, files, resources, hosting, AOS, Ajay O S, web development"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="https://static.ajayos.in/favicon/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://static.ajayos.in" />
+    <meta property="og:title" content="Static Assets | AOS - Ajay O S" />
+    <meta
+      property="og:description"
+      content="Browse and access public static assets hosted by AOS (Ajay O S)."
+    />
+    <meta
+      property="og:image"
+      content="https://static.ajayos.in/favicon/favicon.ico"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://static.ajayos.in" />
+    <meta property="twitter:title" content="Static Assets | AOS - Ajay O S" />
+    <meta
+      property="twitter:description"
+      content="Browse and access public static assets hosted by AOS (Ajay O S)."
+    />
+    <meta
+      property="twitter:image"
+      content="https://static.ajayos.in/favicon/favicon.ico"
+    />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #f8fafc;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .file-manager {
+        background: rgba(15, 23, 42, 0.9);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.1);
+      }
+
+      .toolbar {
+        background: rgba(30, 41, 59, 0.8);
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .breadcrumb-item {
+        color: #94a3b8;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+
+      .breadcrumb-item:hover {
+        background: rgba(56, 189, 248, 0.1);
+        color: #38bdf8;
+      }
+
+      .breadcrumb-item.active {
+        color: #38bdf8;
+        font-weight: 500;
+      }
+
+      .search-box {
+        position: relative;
+        min-width: 250px;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 8px 12px 8px 40px;
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 8px;
+        color: #f8fafc;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: #38bdf8;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #64748b;
+      }
+
+      .view-toggle {
+        display: flex;
+        gap: 5px;
+        background: rgba(15, 23, 42, 0.8);
+        padding: 4px;
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.1);
+      }
+
+      .view-btn {
+        padding: 6px 12px;
+        background: none;
+        border: none;
+        color: #94a3b8;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.2s;
+        font-size: 12px;
+      }
+
+      .view-btn.active {
+        background: #38bdf8;
+        color: #0f172a;
+      }
+
+      .stats {
+        background: rgba(30, 41, 59, 0.8);
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        font-size: 14px;
+        color: #94a3b8;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .file-content {
+        max-height: 600px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #475569 #1e293b;
+      }
+
+      .file-content::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .file-content::-webkit-scrollbar-track {
+        background: #1e293b;
+      }
+
+      .file-content::-webkit-scrollbar-thumb {
+        background: #475569;
+        border-radius: 4px;
+      }
+
+      .file-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        padding: 20px;
+      }
+
+      .file-list {
+        display: block;
+      }
+
+      .file-item {
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid rgba(148, 163, 184, 0.1);
+        border-radius: 12px;
+        padding: 15px;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .file-item:hover {
+        background: rgba(30, 41, 59, 0.8);
+        border-color: #38bdf8;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      }
+
+      .file-list .file-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 8px;
+        padding: 12px 20px;
+        border-radius: 8px;
+      }
+
+      .file-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .file-list .file-icon {
+        font-size: 1.5rem;
+        margin: 0;
+        min-width: 30px;
+      }
+
+      .file-info {
+        flex: 1;
+      }
+
+      .file-name {
+        font-weight: 500;
+        color: #f8fafc;
+        margin-bottom: 5px;
+        word-break: break-word;
+      }
+
+      .file-list .file-name {
+        margin: 0;
+      }
+
+      .file-meta {
+        font-size: 12px;
+        color: #64748b;
+      }
+
+      .folder-item .file-name {
+        color: #22d3ee;
+        font-weight: 600;
+      }
+
+      .file-item.folder-item:hover {
+        border-color: #22d3ee;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 60px 20px;
+        color: #64748b;
+      }
+
+      .error {
+        text-align: center;
+        padding: 60px 20px;
+        color: #ef4444;
+      }
+
+      .spinner {
+        border: 2px solid rgba(56, 189, 248, 0.2);
+        border-top: 2px solid #38bdf8;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 15px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .back-btn {
+        background: rgba(34, 211, 238, 0.1);
+        border: 1px solid #22d3ee;
+        color: #22d3ee;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+        display: none;
+      }
+
+      .back-btn:hover {
+        background: rgba(34, 211, 238, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .toolbar {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+
+        .breadcrumb {
+          min-width: auto;
+        }
+
+        .search-box {
+          min-width: auto;
+        }
+
+        .file-grid {
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: 10px;
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="file-manager">
+        <div class="toolbar">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item active" onclick="navigateTo('')"
+              >📁 static.ajayos.in</span
+            >
+            <span id="breadcrumb-path"></span>
+          </div>
+
+          <div class="search-box">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search files..."
+              id="searchInput"
+            />
+            <span class="search-icon">🔍</span>
+          </div>
+
+          <div class="view-toggle">
+            <button class="view-btn active" onclick="setView('grid')">
+              Grid
+            </button>
+            <button class="view-btn" onclick="setView('list')">List</button>
+          </div>
+        </div>
+
+        <div class="stats" id="stats">
+          <span>Loading repository contents...</span>
+          <button class="back-btn" id="backBtn" onclick="goBack()">
+            ← Back
+          </button>
+        </div>
+
+        <div class="file-content">
+          <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading files...</p>
+          </div>
+          <div class="file-grid" id="fileContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let allFiles = [];
+      let currentPath = "";
+      let currentView = "grid";
+
+      const fileIcons = {
+        jpg: "🖼️",
+        jpeg: "🖼️",
+        png: "🖼️",
+        gif: "🖼️",
+        webp: "🖼️",
+        svg: "🎨",
+        pdf: "📄",
+        txt: "📝",
+        doc: "📄",
+        docx: "📄",
+        md: "📄",
+        js: "📜",
+        html: "🌐",
+        css: "🎨",
+        json: "📋",
+        xml: "📋",
+        py: "🐍",
+        java: "☕",
+        cpp: "⚡",
+        c: "⚡",
+        php: "🔧",
+        zip: "📦",
+        rar: "📦",
+        tar: "📦",
+        gz: "📦",
+        mp4: "🎬",
+        avi: "🎬",
+        mov: "🎬",
+        mp3: "🎵",
+        wav: "🎵",
+        default: "📄",
+      };
+
+      function getFileIcon(filename) {
+        const ext = filename.split(".").pop()?.toLowerCase();
+        return fileIcons[ext] || fileIcons.default;
+      }
+
+      function formatFileSize(bytes) {
+        if (!bytes) return "";
+        const units = ["B", "KB", "MB", "GB"];
+        let size = bytes,
+          i = 0;
+        while (size >= 1024 && i < units.length - 1) {
+          size /= 1024;
+          i++;
+        }
+        return `${size.toFixed(1)} ${units[i]}`;
+      }
+
+      function filterFiles(searchTerm, path = "") {
+        return allFiles.filter((file) => {
+          // hide dotfiles
+          if (file.path.split("/").some((p) => p.startsWith("."))) return false;
+
+          const matchesSearch =
+            !searchTerm ||
+            file.path.toLowerCase().includes(searchTerm.toLowerCase());
+
+          const inCurrentPath =
+            path === ""
+              ? !file.path.includes("/") || file.path.startsWith(path)
+              : file.path.startsWith(path + "/");
+
+          return matchesSearch && inCurrentPath;
+        });
+      }
+
+      function navigateTo(path) {
+        currentPath = path;
+        updateBreadcrumb();
+        renderFiles();
+        const newUrl = path ? `/${path}/` : "/";
+        history.pushState({}, "", newUrl);
+      }
+
+      function updateBreadcrumb() {
+        const breadcrumbPath = document.getElementById("breadcrumb-path");
+        const backBtn = document.getElementById("backBtn");
+
+        if (currentPath) {
+          const pathParts = currentPath.split("/");
+          let html = "";
+          let build = "";
+
+          pathParts.forEach((part) => {
+            build = build ? `${build}/${part}` : part;
+            html += ` / <span class="breadcrumb-item" onclick="navigateTo('${build}')">${part}</span>`;
+          });
+
+          breadcrumbPath.innerHTML = html;
+          backBtn.style.display = "block";
+        } else {
+          breadcrumbPath.innerHTML = "";
+          backBtn.style.display = "none";
+        }
+      }
+
+      function goBack() {
+        if (currentPath) {
+          const parts = currentPath.split("/");
+          parts.pop();
+          navigateTo(parts.join("/"));
+        }
+      }
+
+      function setView(view) {
+        currentView = view;
+        document
+          .querySelectorAll(".view-btn")
+          .forEach((b) => b.classList.remove("active"));
+        event.target.classList.add("active");
+
+        const container = document.getElementById("fileContainer");
+        container.className = view === "grid" ? "file-grid" : "file-list";
+      }
+
+      function renderFiles() {
+        const container = document.getElementById("fileContainer");
+        const searchTerm = document.getElementById("searchInput").value;
+
+        const filesInDir = filterFiles(searchTerm, currentPath);
+        const folders = new Set();
+        const files = [];
+
+        filesInDir.forEach((file) => {
+          const relPath = currentPath
+            ? file.path.substring(currentPath.length + 1)
+            : file.path;
+          if (relPath.includes("/")) {
+            folders.add(relPath.split("/")[0]);
+          } else {
+            files.push({ ...file, relativePath: relPath });
+          }
+        });
+
+        container.innerHTML = "";
+
+        // Folders
+        [...folders].sort().forEach((folder) => {
+          const folderPath = currentPath ? `${currentPath}/${folder}` : folder;
+          const div = document.createElement("div");
+          div.className = "file-item folder-item";
+          div.onclick = () => navigateTo(folderPath);
+          div.innerHTML = `
+        <div class="file-icon">📁</div>
+        <div class="file-info">
+          <div class="file-name">${folder}</div>
+          <div class="file-meta">Folder</div>
+        </div>`;
+          container.appendChild(div);
+        });
+
+        // Files
+        files
+          .sort((a, b) => a.relativePath.localeCompare(b.relativePath))
+          .forEach((file) => {
+            const div = document.createElement("div");
+            div.className = "file-item";
+            div.onclick = () =>
+              window.open(`https://static.ajayos.in/${file.path}`, "_blank");
+            div.innerHTML = `
+          <div class="file-icon">${getFileIcon(file.relativePath)}</div>
+          <div class="file-info">
+            <div class="file-name">${file.relativePath}</div>
+            <div class="file-meta">${formatFileSize(
+              file.size
+            )} • Click to open</div>
+          </div>`;
+            container.appendChild(div);
+          });
+
+        updateStats(folders.size, files.length);
+      }
+
+      function updateStats(folders, files) {
+        const stats = document.getElementById("stats");
+        const total = allFiles.filter(
+          (f) => !f.path.split("/").some((p) => p.startsWith("."))
+        ).length;
+        const searchTerm = document.getElementById("searchInput").value;
+
+        let text = "";
+        if (searchTerm) {
+          text = `🔍 Found ${folders} folders, ${files} files`;
+        } else if (currentPath) {
+          text = `📂 ${folders} folders, ${files} files in ${currentPath}`;
+        } else {
+          text = `📂 ${folders} folders, ${files} files • ${total} total files in repository`;
+        }
+
+        stats.querySelector("span").textContent = text;
+      }
+
+      async function loadFiles() {
+        try {
+          const apiUrl = `https://api.github.com/repos/ajay-o-s/static-assets/git/trees/master?recursive=1`;
+          const res = await fetch(apiUrl);
+          const data = await res.json();
+          if (!data.tree) throw new Error("Failed to fetch repo");
+
+          allFiles = data.tree.filter((f) => f.type === "blob");
+          document.getElementById("loading").style.display = "none";
+
+          // set path based on current URL
+          const pathFromUrl = window.location.pathname.replace(/^\/|\/$/g, "");
+          currentPath = pathFromUrl;
+          updateBreadcrumb();
+          renderFiles();
+        } catch (err) {
+          document.getElementById(
+            "loading"
+          ).innerHTML = `<div class="error">❌ Error loading repo<br><small>${err.message}</small></div>`;
+        }
+      }
+
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", () => renderFiles());
+
+      loadFiles();
+    </script>
+  </body>
+</html>
